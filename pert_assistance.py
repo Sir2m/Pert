@@ -11,12 +11,12 @@ def time(op, ml, pem):
     ml = np.array(ml)
     
     if not (op.size == pem.size & pem.size == ml.size):
-        print("error")
+        print("Size Error, Problem in the code or input")
         return 0
     
     t = (op + pem + (4 * ml)) / 6
     v = ((pem - op) / 6) ** 2
-    print('Given Data:\n', np.concatenate([op.reshape(1, n), ml.reshape(1, n), pem.reshape(1, n)]).transpose())
+    print('Given Data:\n', np.concatenate((op.reshape(n, 1), ml.reshape(n, 1), pem.reshape(n, 1)), axis=1))
     data = {
         'Time': t,
         "Variance": v
@@ -31,14 +31,14 @@ def inp_loop(typ, n):
     for _ in range(n):
         while True:
             try:
-                x = float(input(f"Enter {typ} time {_ + 1}: "))
+                x = float(input(f"Enter {typ} time for activity {_ + 1}: "))
                 l.append(x)
                 break
             except KeyboardInterrupt:
                 quit()
             except:
                 pass
-    print('end')
+    print(f'{typ} end')
     return l
 
 
@@ -46,13 +46,13 @@ def critical_path(n):
     x = ''
     l = []
     for _ in range(n):
-        x = input(f"Enter Letter {_ + 1}: ")
+        x = input(f"Enter critical path node {_ + 1}: ")
         l.append(x.upper())
     print('end')
     return l
 
 
-n = int(input('Enter the data length: '))
+n = int(input('Number of activities: '))
 print('okay')
 
 op = inp_loop('optimistic', n)
@@ -62,8 +62,8 @@ pem = inp_loop('pessimistic', n)
 t = time(op, ml, pem)
 print(t)
 
-nn = int(input('no of critical path points: '))
-print('okay')
+nn = int(input('Number of critical path nodes: '))
+print('Starting ...')
 
 cp = critical_path(nn)
 
@@ -75,7 +75,7 @@ for _ in range(nn):
 print(f"Variance = {var}")
 
 et = int(input('Estimated time: '))
-p = int(input('Probability at? '))
+p = int(input('Probability at: '))
 
 z = (p - et) / np.sqrt(var)
 print(f'z = {z}')
