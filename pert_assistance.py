@@ -23,4 +23,30 @@ def time(op, ml, pem):
     t = pd.DataFrame(data, index=[alph[i] for i in range(n)])
     return t
 
-print(time([2, 10, 8, 10, 7, 9, 3, 5], [4, 12, 9, 15, 7.5, 9, 3.5, 5], [12, 26, 10, 20, 11, 9, 7, 5]))
+
+def inp_loop(typ, n):
+    x = 0
+    l = []
+    for _ in range(n):
+        while True:
+            try:
+                x = float(input(f"Enter {typ} time {_ + 1}: "))
+                l.append(x)
+                break
+            except KeyboardInterrupt:
+                quit()
+            except:
+                pass
+    print('end')
+    return l
+
+
+n = int(input('Enter the data length: '))
+print('okay')
+
+op = inp_loop('optimistic', n)
+ml = inp_loop('most likely', n)
+pem = inp_loop('pessimistic', n)
+
+t = time(op, ml, pem)
+print(t)
