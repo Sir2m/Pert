@@ -72,6 +72,8 @@ var = 0
 for _ in range(nn):
     var += t['Variance'][cp[_]]
 
+print(f"Variance = {var}")
+
 et = int(input('Estimated time: '))
 p = int(input('Probability at? '))
 
