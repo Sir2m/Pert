@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from scipy.stats import norm
 import string
 
 def time(op, ml, pem):
@@ -70,3 +71,11 @@ var = 0
 
 for _ in range(nn):
     var += t['Variance'][cp[_]]
+
+et = int(input('Estimated time: '))
+p = int(input('Probability at? '))
+
+z = (p - et) / np.sqrt(var)
+print(f'z = {z}')
+
+print(norm.cdf(z))
