@@ -41,6 +41,16 @@ def inp_loop(typ, n):
     return l
 
 
+def critical_path(n):
+    x = ''
+    l = []
+    for _ in range(n):
+        x = input(f"Enter Letter {_ + 1}: ")
+        l.append(x.upper())
+    print('end')
+    return l
+
+
 n = int(input('Enter the data length: '))
 print('okay')
 
@@ -50,3 +60,13 @@ pem = inp_loop('pessimistic', n)
 
 t = time(op, ml, pem)
 print(t)
+
+nn = int(input('no of critical path points: '))
+print('okay')
+
+cp = critical_path(nn)
+
+var = 0
+
+for _ in range(nn):
+    var += t['Variance'][cp[_]]
