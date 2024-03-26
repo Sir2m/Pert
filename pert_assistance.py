@@ -74,8 +74,8 @@ for _ in range(nn):
 
 print(f"Variance = {var}")
 
-et = int(input('Estimated time: '))
-p = int(input('Probability at: '))
+et = float(input('Estimated time: '))
+p = float(input('Probability at: '))
 
 z = (p - et) / np.sqrt(var)
 print(f'z = {z}')
