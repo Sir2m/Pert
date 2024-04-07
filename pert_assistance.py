@@ -21,8 +21,8 @@ def time(op, ml, pem):
         'Time': t,
         "Variance": v
     }
-    t = pd.DataFrame(data, index=[alph[i] for i in range(n)])
-    return t
+    table = pd.DataFrame(data, index=[alph[i] for i in range(n)])
+    return table
 
 
 def inp_loop(typ, n):
@@ -59,22 +59,21 @@ op = inp_loop('optimistic', n)
 ml = inp_loop('most likely', n)
 pem = inp_loop('pessimistic', n)
 
-t = time(op, ml, pem)
-print(t)
+table = time(op, ml, pem)
+print(table)
 
 nn = int(input('Number of critical path nodes: '))
 print('Starting ...')
 
 cp = critical_path(nn)
-
 var = 0
+et = 0
 
 for _ in range(nn):
-    var += t['Variance'][cp[_]]
+    var += table['Variance'][cp[_]]
+    et += table['Time'][cp[_]]
+print(f"Variance = {var}\nEstimated Time = {et}")
 
-print(f"Variance = {var}")
-
-et = float(input('Estimated time: '))
 p = float(input('Probability at: '))
 
 z = (p - et) / np.sqrt(var)
